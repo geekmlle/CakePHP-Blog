@@ -1,7 +1,11 @@
 <!-- File: /app/View/Posts/index.ctp -->
 
 <h1>Blog posts</h1>
+
+<p><a href="/cake/users/logout">Logout</a></p>
+
 <p><?php echo $this->Html->link('Add Post', array('action' => 'add')); ?></p>
+
 <table>
     <tr>
         <th>Id</th>
