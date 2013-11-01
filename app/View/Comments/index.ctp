@@ -13,8 +13,10 @@
     </tr>
 
 <!-- Here's where we loop through our $posts array, printing out post info -->
+<p><?php echo $this->Session->read('post_id'); ?></p>
 
     <?php foreach ($comments as $comment): ?>
+    
     <tr>
         <td><?php echo $comment['Comment']['id']; ?></td>
         <td>

@@ -12,6 +12,7 @@
 		public function login() {
 			if ($this->request->is('post')) {
 				if ($this->Auth->login()) {
+					//$userId = $this->Auth->user('id');
 					return $this->redirect($this->Auth->redirect());
 				}
 				$this->Session->setFlash(__('Invalid username or password, try again'));
@@ -29,6 +30,7 @@
 	
 		public function view($id = null) {
 			$this->User->id = $id;
+			$userId = $this->Auth->user('id');
 			if (!$this->User->exists()) {
 				throw new NotFoundException(__('Invalid user'));
 			}

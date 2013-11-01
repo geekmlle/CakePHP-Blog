@@ -2,10 +2,11 @@
 
 	class PostsController extends AppController 
 	{
-    	public $helpers = array('Html', 'Form');
+    	public $helpers = array('Html', 'Form', 'Session');
 
 	    public function index() {
         	$this->set('posts', $this->Post->find('all'));
+                   
     	}
     	
     	public function view($id = null) {
@@ -14,10 +15,13 @@
 			}
 	
 			$post = $this->Post->findById($id);
+			$this->Session->write('post_id', $id);
+			
 			if (!$post) {
 				throw new NotFoundException(__('Invalid post'));
 			}
-			$this->set('post', $post);
+		    $this->set('post', $post);
+
     	}
     	
     	
@@ -80,6 +84,7 @@
 				if ($this->Post->isOwnedBy($postId, $user['id'])) {
 					return true;
 				}
+				else return false;
 			}
 		
 			return parent::isAuthorized($user);
