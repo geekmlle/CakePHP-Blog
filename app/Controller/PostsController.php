@@ -2,11 +2,12 @@
 
 	class PostsController extends AppController 
 	{
-    	public $helpers = array('Html', 'Form', 'Session');
+    	public $helpers = array('Html', 'Form', 'Session' );
 
 	    public function index() {
         	$this->set('posts', $this->Post->find('all'));
-                   
+            
+            
     	}
     	
     	public function view($id = null) {
@@ -21,7 +22,10 @@
 				throw new NotFoundException(__('Invalid post'));
 			}
 		    $this->set('post', $post);
-
+		    //AQUI HAY UN CAMBIO
+		    $this->loadModel("Comment");
+			$this->set('comments', $this->Comment->find('all', 
+					array('conditions' => array('Comment.post_id' => $id))));
     	}
     	
     	
