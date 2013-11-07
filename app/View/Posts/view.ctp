@@ -7,10 +7,6 @@
 
 <p><?php echo h($post['Post']['body']); ?></p>
 
-<p><?php echo $this->Html->link(
-    'View Comments',
-    array('controller' => 'comments', 'action' => 'index')
-);?></p>
 
 <table>
     <tr>
@@ -21,7 +17,6 @@
     </tr>
 
 <!-- Here's where we loop through our $posts array, printing out post info -->
-<p><?php echo $this->Session->read('post_id'); ?></p>
 
     <?php foreach ($comments as $comment): ?>
     
@@ -46,3 +41,8 @@
     <?php endforeach; ?>
 
 </table>
+
+<?php echo $this->Html->link(
+    'Add Comment',
+    array('controller' => 'comments', 'action' => 'add', $post ['Post']['id'])
+); ?>
