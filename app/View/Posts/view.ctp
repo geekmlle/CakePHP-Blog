@@ -1,7 +1,8 @@
 <!-- File: /app/View/Posts/view.ctp -->
 
-<h1><?php echo h($post['Post']['title']); ?></h1>
+<p><a href="/cake/posts/">Home</a></p>
 
+<h1>Post Title: <?php echo h($post['Post']['title']); ?></h1>
 
 <p><small>Created: <?php echo $post['Post']['created']; ?></small></p>
 
@@ -16,22 +17,22 @@
         <th>Created</th>
     </tr>
 
-<!-- Here's where we loop through our $posts array, printing out post info -->
+<!-- Here's where we loop through our $comments array, printing out post info -->
 
     <?php foreach ($comments as $comment): ?>
     
 		<tr>
 			<td><?php echo $comment['Comment']['id']; ?></td>
 			<td>
-				<?php echo $this->Html->link($comment['Comment']['body'], array('action' => 'view', $comment['Comment']['id'])); ?>
+				<?php echo $comment['Comment']['body']; ?>
 			</td>
 			<td>
 				<?php echo $this->Form->postLink(
 					'Delete',
-					array('action' => 'delete', $comment['Comment']['id']),
+					array('controller' => 'comments','action' => 'delete', $comment['Comment']['id']),
 					array('confirm' => 'Are you sure?'));
 				?>
-				<?php echo $this->Html->link('Edit', array('action' => 'edit', $comment['Comment']['id'])); ?>
+				<?php echo $this->Html->link('Edit', array('controller' => 'comments','action' => 'edit', $comment['Comment']['id'])); ?>
 			</td>
 			<td>
 				<?php echo $comment['Comment']['created']; ?>

@@ -36,6 +36,43 @@
 			}
 		}
 		
+				
+		public function edit($id = null){
+				if (!$id) {
+					throw new NotFoundException(__('Invalid comment'));
+				}
+
+				$comment = $this->Comment->findById($id);
+				if (!$comment) {
+					throw new NotFoundException(__('Invalid comment'));
+				}
+
+				if ($this->request->is(array('post', 'put'))) {
+					$this->Comment->id = $id;
+					if ($this->Comment->save($this->request->data)) {
+						$this->Session->setFlash(__('Your post has been updated.'));
+						return $this->redirect('/posts/');
+					}
+					$this->Session->setFlash(__('Unable to update your post.'));
+				}
+
+				if (!$this->request->data) {
+					$this->request->data = $comment;
+				}
+			
+		}
+		
+		public function delete($id) {
+			if ($this->request->is('get')) {
+				throw new MethodNotAllowedException();
+			}
+
+			if ($this->Comment->delete($id)) {
+				$this->Session->setFlash(__('The comment with id: %s has been deleted.', h($id)));
+				return $this->redirect('/posts/');
+			}
+		}
+		
 	
 	}
 

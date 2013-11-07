@@ -69,15 +69,10 @@
 			if ($this->request->is('get')) {
 				throw new MethodNotAllowedException();
 			}
-			
-			//Tell the Comment table that $id is actually $post_id
-			//First it deletes the comments and then it deletes the post
-			$this->loadModel("Comment");
-			if($this->Comment->delete( array('post_id' => $id))){
-				if ($this->Post->delete($id)) {
-					$this->Session->setFlash(__('The post with id: %s has been deleted.', h($id)));
-					return $this->redirect(array('action' => 'index'));
-				}
+
+			if ($this->Post->delete($id)) {
+				$this->Session->setFlash(__('The post with id: %s has been deleted.', h($id)));
+				return $this->redirect(array('action' => 'index'));
 			}
 		}
 		
