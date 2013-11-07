@@ -28,7 +28,7 @@
         </td>
         <td>
             <?php 
-            	if($post['Post']['user_id'] == $this->Session->read('Auth.User.id')){
+            	if( $post['Post']['user_id'] == $this->Session->read('Auth.User.id') ){
             		echo $this->Form->postLink(
 					'Delete',
 					array('action' => 'delete', $post['Post']['id']),
