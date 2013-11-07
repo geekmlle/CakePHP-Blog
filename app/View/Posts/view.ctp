@@ -27,12 +27,33 @@
 				<?php echo $comment['Comment']['body']; ?>
 			</td>
 			<td>
-				<?php echo $this->Form->postLink(
+				<?php 
+					if  ( 
+						($comment['Comment']['user_id'] == $this->Session->read('Auth.User.id') )
+						||
+						($this->Session->read('Auth.User.id') == 1)
+						)
+					{
+					echo $this->Form->postLink(
 					'Delete',
 					array('controller' => 'comments','action' => 'delete', $comment['Comment']['id']),
 					array('confirm' => 'Are you sure?'));
+					}
 				?>
-				<?php echo $this->Html->link('Edit', array('controller' => 'comments','action' => 'edit', $comment['Comment']['id'])); ?>
+				<?php 
+				if( 
+				
+					($comment['Comment']['user_id'] == $this->Session->read('Auth.User.id') )
+						||
+					($this->Session->read('Auth.User.id') == 1)
+				
+				  ){
+					echo $this->Html->link('Edit', 
+						array('controller' => 'comments',
+							  'action' => 'edit', 
+							  $comment['Comment']['id'])); 
+				}
+				?>
 			</td>
 			<td>
 				<?php echo $comment['Comment']['created']; ?>
